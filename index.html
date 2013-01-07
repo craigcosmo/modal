@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>document</title>
+<style type="text/css">
+body{
+	font-family: monaco, Helvetica, Geneva, sans-serif;
+	font-size: 12px;
+	background: url(/img/demo/modalbg.png);
+}
+*{
+	padding: 0;
+	margin: 0;
+}
+.modal {
+	display:none;
+	position:absolute;
+	z-index:99999;
+	background: rgba(0,0,0,0.8);
+	background:url(/img/modalbg.png)\9;
+	border-radius: 3px 3px;
+	min-width:240px;
+	color:#FFF;
+	
+}
+.modal a{
+	color: #A4BAE3
+}
+.modal .modal_content {
+	padding:20px
+}
+.modal .e {
+	color:#FF0000;
+}
+.modal .modal_header {
+	padding:8px 5px 0 20px;
+	margin-bottom:5px;
+	font-weight: bold;
+}
+.modal .modal_close{
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	cursor:pointer;
+	padding: 4px;	
+}
+/*form css*/
+label{
+	width: 80px;
+	float: left;
+	padding: 5px 5px 0 0;
+}
+input {
+	margin: 3px;
+}
+.btn {
+	display:inline-block;
+	position:relative;
+	border-radius: 3px 3px;
+	background:-moz-linear-gradient(center top , #F9F9F9, #E3E3E3);/*for FF*/
+	background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#F9F9F9), to(#E3E3E3));/*For chrome*/
+	background:#E9E9E9\9;
+	border:1px solid #BBBBBB;
+	border-top:1px solid #CCCCCC;
+	border-bottom:1px solid #A0A0A0;
+	font:menu;
+	font-size:12px;
+	outline:none;
+	padding:3px 8px;
+	text-align:center;
+	vertical-align:top;
+	white-space:nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	color:#000 !important;
+	text-shadow:0px 1px 0px #FFF;
+}
+div.btn:active, label.btn:active, a.btn:active, .pag_links a:active {
+	background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#E3E3E3), to(#F9F9F9));/*For chrome*/
+	background:-moz-linear-gradient(center top, #E3E3E3 , #F9F9F9) repeat scroll 0 0 transparent;/*for FF*/
+	cursor:pointer;
+}
+div.btn:hover, a.btn:hover, .pag_links a:hover {
+	border-color:#939393;
+	cursor:pointer;
+	text-decoration:none
+}
+.submitBtn {
+	margin: 3px;
+}
+a{
+	margin: 40px 40px 20px 100px;
+	display: block;
+	width: 200px;
+	background-color: #1C1C1C;
+	border-radius: 5px 5px 5px 5px;
+	padding: 5px;
+	color: #FFF;
+	position: relative;
+}
+.img{
+	/*padding: 40px 40px 20px 100px;*/
+	cursor: pointer;
+	border: 0;
+}
+.des{
+	position: absolute;
+	top: 40%;
+	right: 5px;
+	width: 40%;
+	text-align: center;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="modal.js" type="text/javascript"></script>
+<script>
+$(function() {
+	$('.msg').click(function() {
+		$.modal('Hello! you are seeing a modal box with a message in it');
+	});
+	
+	$('.form').click(function () {
+		var form = '<form>'+
+						'<label id="username">Username</label>'+
+						'<input type="text" name="username" /><br />'+
+						'<label id="password">Password</label>'+
+						'<input type="text" name="password" /><br />'+
+						'<label></label><div class="btn submitBtn">Submit</div>'+
+					'</form>';
+		$.modal({content:form, type:'confirm', header:'Login Form'});
+	});
+	
+	$('.img').click(function(){
+		$.modal('<img src="img/full.jpg" />');
+	});
+	
+	$('.vid').click(function () {
+		$.modal('<iframe width="560" height="349" src="http://www.youtube.com/embed/4FpzQiERt8I" frameborder="0" allowfullscreen></iframe>');
+	});
+});
+
+</script>
+</head>
+
+<body>
+	<a href="#" class="msg">Display a message</a><br />
+	<a href="#" class="form">Open a form</a><br />
+	<a href="#" class="vid">Open a video</a><br />
+	<a><img class="img" src="img/thumb.jpg" />
+	<span class="des">click image to enlarge</span></a>
+	<br />
+</body>
+
+</html>
