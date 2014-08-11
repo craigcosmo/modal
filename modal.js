@@ -36,77 +36,29 @@ Basic html
 
 (function($){	
 	$.modal = function(options){
-		var defaults = {
-			content: '',
-			type: undefined,
-			header: '',
-			onComplete : function(){}
-		};
 
-		if (typeof(options) === "object"){
-			var o = $.extend({},defaults, options);
-			setTimeout(m,100);
-		}else{
-			var defaults = {
-				content: options,
-				type: undefined,
-				header: '',
-				onComplete : function(){}
-			};
-			var o = defaults;
-			setTimeout(m,100);
-		}
+		var modal=	'<div class="modal">'+
+						'<div class="modal_content"></div>'+
+					'</div>';
+
+		$('.modal').remove();
+		$('body').append(modal);
+		$('.modal_content').prepend(options);
 		
-		function m(){		
+		var left = ($(window).width() - $('.modal').outerWidth())/2 + $(document).scrollLeft();
+		var top = (($(window).height() - $('.modal').outerHeight())/2) * (2/2) + $(document).scrollTop();	
 		
-			var modal;
-			if(o.type == 'message'){
-				modal=	'<div class="modal">'+
-							'<div class="modal_header"></div>'+
-							'<div class="modal_content"></div>'+
-							'<span class="modal_close">x</span>'+
-						'</div>';
-			}else if(o.type == 'confirm'){
-				modal=	'<div class="modal">'+
-							'<div class="modal_header"></div>'+
-							'<div class="modal_content"></div>'+
-							'<span class="modal_close">x</span>'+
-						'</div>';
-			}else if(o.type == undefined){
-				modal=	'<div class="modal">'+
-							'<div class="modal_content"></div>'+
-						'</div>';
-			}
-			
-			$('.modal').remove();
-			$('body').append(modal);
-			
-			$('.modal_header').prepend(o.header);
-			$('.modal_content').prepend(o.content);
-			
-			if(typeof(options) === "object"){
-				o.onComplete.call(this);
-			}
-			
-			var left = ($(window).width() - $('.modal').outerWidth())/2 + $(document).scrollLeft();
-			var top = (($(window).height() - $('.modal').outerHeight())/2) * (2/5) + $(document).scrollTop();	
-			
-			$('.modal').css({'top':top+'px', 'left':left+'px'}).fadeIn(80);
-			$('.modal_close').live("mouseup", function(e){
-				$(e.target).closest('.modal').fadeOut(80,function(){ 
+		$('.modal').css({'top':top+'px', 'left':left+'px'}).fadeIn(80);
+
+		// close modal by clicking on the screen
+		$(document).mouseup(function(e){
+			if(!$(e.target).is('.modal, .modal *')){
+				$('.modal').fadeOut(80,function(){ 
 					$(this).remove();
+					$(document).unbind('mouseup');
 				});
-			});
-			if(o.type == undefined) {
-				$(document).mouseup(function(e){
-					if(!$(e.target).is('.modal, .modal *')){
-						$('.modal').fadeOut(80,function(){ 
-							$(this).remove();
-							$(document).unbind('mouseup');
-						});
-					}
-				});	
 			}
-		}
+		});
+
 	}
 })(jQuery);
