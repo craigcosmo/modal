@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <title>Jquery Modal</title>
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="page.css">
 <link rel="stylesheet" href="modal.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script src="modal.js"></script>
 <script>
 $(function() {
@@ -13,32 +16,25 @@ $(function() {
 	});
 	$('.form').click(function () {
 		var form = '<form>'+
-						'<label id="username">Username</label>'+
-						'<input type="text" name="username" /><br />'+
-						'<label id="password">Password</label>'+
-						'<input type="text" name="password" /><br />'+
-						'<label></label><div class="btn submitBtn">Submit</div>'+
+						'<input type="text" name="username" placeholder="username" /><br>'+
+						'<input type="text" name="password" placeholder="password" /><br>'+
+						'<div class="btn submitBtn">Submit</div>'+
 					'</form>';
 		$.modal(form);
 	});
 	
-	$('.img').click(function(){
-		$.modal('<img src="img/full.jpg" />');
-	});
 	$('.vid').click(function () {
-		$.modal('<iframe width="560" height="349" src="http://www.youtube.com/embed/4FpzQiERt8I" frameborder="0" allowfullscreen></iframe>');
+		$.modal('<iframe width="560" height="315" src="https://www.youtube.com/embed/GL0rbxB9Lqg" frameborder="0" allowfullscreen></iframe>');
 	});
 });
 </script>
 </head>
 
 <body>
-	<a href="#" class="msg">Display a message</a><br />
-	<a href="#" class="form">Open a form</a><br />
-	<a href="#" class="vid">Open a video</a><br />
-	<a><img class="img" src="img/thumb.jpg" />
-	<span class="des">click image to enlarge</span></a>
-	<br />
+	<a href="#" class="msg">show message</a><br>
+	<a href="#" class="form">show form</a><br>
+	<a href="#" class="vid">show video</a><br>
+	<br>
 </body>
 
 </html>
