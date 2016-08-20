@@ -1,7 +1,8 @@
 
 /*modal css*/
 .modal {
-	display:none;
+	/* display:none; */
+	display: inline-block;
 	position: fixed;
 	z-index:99999;
 	border-radius: 5px;
@@ -10,10 +11,17 @@
 	box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.4);
 	background: #fff;
 	opacity: 0;
-	font-size: 1.5rem;
-	background: rgba(255,255,255, 1) !important;
-	border: 1px solid block !important;
-	color: #aaa
+	color: #aaa;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out ; 
+}
+.modal-animate{
+	/* display: inline-block; */
+	top:50%;
+	opacity: 1;
 }
 .modal-overlay {
 	display: none;
@@ -27,6 +35,7 @@
 	left: 0;
 	bottom: 0;
 	opacity: 0;
+	transition: all 1s ease-in-out;
 }
 .modal .modal-content {
 	text-align: center;
