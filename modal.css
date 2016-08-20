@@ -1,77 +1,19 @@
-*{
-	padding:0;
-	margin:0;
-	box-sizing: border-box;
-}
+
 /*modal css*/
 .modal {
 	display:none;
-	/*position:absolute;*/
 	position: fixed;
 	z-index:99999;
-	/*background: rgba(189,189,189,0.5);*/
 	border-radius: 5px;
-	/*min-width:260px;
-	max-width: 400px;*/
 	min-width:20%;
 	max-width: 80%;
-	/*padding:6px;*/
-	/*font-family: Quicksand*/
-	/*box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);*/
-	/*box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.5);*/
 	box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.4);
-	border: 1px solid #aaa;
 	background: #fff;
 	opacity: 0;
 	font-size: 1.5rem;
 	background: rgba(255,255,255, 1) !important;
 	border: 1px solid block !important;
 	color: #aaa
-}
-.modal h4 {
-	padding-bottom: 30px;
-	padding-top: 10px;
-}
-.modal .foot {
-	/*vertical-align: middle;*/
-	margin-top: 25px;
-	margin-bottom: 10px;
-}
-.modal .close, .modal .ok {
-	display: inline-block;
-	color: #3399ff;
-	font-size: 2rem;
-	height: 40px;
-	vertical-align: middle;
-	padding: 0px 15px;
-	line-height: 40px;
-	cursor: pointer;
-}
-.modal .sep {
-	/*padding-left: 20px;*/
-	display: inline-block;
-	width: 1px;
-	height: 30px;
-	background: #aaa;
-	vertical-align: middle;
-}
-.modal.fixed {
-	display:none;
-
-	position: fixed;
-	z-index:99999;
-	/*background: rgba(189,189,189,0.5);*/
-	border-radius: 5px;
-	min-width:260px;
-
-	padding:6px;
-	box-shadow: 3px 3px 12px 0 rgba(0, 0, 0, 0.4);
-	border: 1px solid #aaa;
-	background: #fff;
-	opacity: 0;
-	/*margin: auto;
-	right: 0;
-	left: 0;*/
 }
 .modal-overlay {
 	display: none;
@@ -86,22 +28,9 @@
 	bottom: 0;
 	opacity: 0;
 }
-.modal a{
-	/*color: #A4BAE3;*/
-}
-
 .modal .modal-content {
-	/*background: rgba(255,255,255,0.99);*/
-	
 	text-align: center;
 	padding:20px;
-
-}
-.modal .modal-header {
-	padding:8px 5px 0 20px;
-	margin-bottom:5px;
-	font-weight: bold;
-
 }
 .modal .modal-close{
 	position: absolute;
@@ -109,15 +38,5 @@
 	right: 5px;
 	cursor:pointer;
 	padding: 4px;	
+}
 
-}
-.modal.error{
-	color: #cc2317;
-}
-.modal.warning{
-
-}
-.modal.noti{
-
-}
-/*end modal css*/
