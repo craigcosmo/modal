@@ -1,11 +1,33 @@
 (function($){	
-	$.modal = function(text,options){
+	function createModalObject(){
 
-		var modal=	'<div class="modal" id="modal">'+
+		var m=	'<div class="modal" id="modal">'+
 						'<div class="modal-content"></div>'+
 					'</div>';
 
+		var div = document.createElement('div');
+		div.innerHTML = m
+		m = div.firstChild
+		return m
+	}
+	function removeCurrentModal(id){
+		$(id).remove();
+	}
+	function removeCurrentOverlay(){
+		$('#modal-overlay').remove();
+	}
+	function createOverlay(){
 		var overlay = 	'<div class="modal-overlay" id="modal-overlay"></div>';	
+
+		var div = document.createElement('div');
+		div.innerHTML = overlay
+		overlay = div.firstChild
+		return overlay
+	}
+
+
+
+	$.modal = function(text,options){
 
 		var defaults = {
 			parent:'body',
@@ -13,60 +35,81 @@
 			id:'.modal',
 			closeOnClick: true,
 			placeholder: '.modal-content',
-			closeBtn: ''
+			closeBtn: '',
+			animateClass: 'modal-animate',
 		},
 
-		o = $.extend({},defaults, options);
+		o = Object.assign({},defaults, options);
 
-		$('#modal-overlay').remove();
-		$(o.id).remove();
 
-		modal = $(modal);
-		overlay = $(overlay);
+		removeCurrentOverlay();
+		removeCurrentModal(o.id);
 
-		if (o.overlay) $(o.parent).append(overlay);
-		$(o.parent).append(modal);
-		modal.find(o.placeholder).prepend(text);
+		var parent = document.querySelector('body')
+		var modal = createModalObject()
+		var overlay = createOverlay()
 
-		if (o.overlay) {
-			overlay.show();
-		}
+		o.overlay && parent.appendChild(overlay);
+		parent.appendChild(modal);
+		modal.querySelector(o.placeholder).innerHTML = text ;
+
+
 		setTimeout( function(){
-			modal.addClass('modal-animate');
+			modal.classList.add(o.animateClass);
 		}, 0)
 		
 
-		// close modal by clicking on the screen
-		$(document).on('mouseup touchend', function(e){
-			if(o.closeOnClick) {
-				if(!$(e.target).is('#modal, #modal *')){	
-					overlay.fadeOut(80,function(){
-						$(this).remove();
-					});
-					modal.fadeOut(80,function(){ 
-						$(this).remove();
-						if(!modal.length) $(document).unbind('mouseup');
-					});
-				}
+		function handleDocumentOnClick(){
+			console.log(modal.children)
+			if(!o.closeOnClick)  return
+			var e = window.event
+			var doc = this
+			var inner = modal.querySelectorAll('*')
+			while( e.target && e.target != document.body){
+
 			}
+			// if (e.target !== modal && e.target !== modal.children[0] ) {
+				modal.classList.remove(o.animateClass)
+				modal.addEventListener('transitionend', function(){
+					this.remove()
+					doc.removeEventListener('mouseup', handleDocumentOnClick)
+				}, false)
+			// }
 			
-		});
+		}
 
-		$(document).on('keydown', function(e){
-			if (e.keyCode == 27) { 
-			   	overlay.fadeOut(80,function(){
-					$(this).remove();
-				});
-				modal.fadeOut(80,function(){ 
-					$(this).remove();
-				});
-			}
-		});
+		document.addEventListener('mouseup', handleDocumentOnClick, false)
+		// // close modal by clicking on the screen
+		// $(document).on('mouseup touchend', function(e){
+		// 	if(o.closeOnClick) {
+		// 		if(!$(e.target).is('#modal, #modal *')){	
+		// 			overlay.fadeOut(80,function(){
+		// 				$(this).remove();
+		// 			});
+		// 			modal.fadeOut(80,function(){ 
+		// 				$(this).remove();
+		// 				if(!modal.length) $(document).unbind('mouseup');
+		// 			});
+		// 		}
+		// 	}
+			
+		// });
 
-		modal.find(o.closeBtn).click(function(){
-			if(overlay.length) overlay.remove();
-			modal.remove();
-		});
+		// $(document).on('keydown', function(e){
+		// 	if (e.keyCode == 27) { 
+		// 	   	overlay.fadeOut(80,function(){
+		// 			$(this).remove();
+		// 		});
+		// 		modal.fadeOut(80,function(){ 
+		// 			$(this).remove();
+		// 		});
+		// 	}
+		// });
+
+		// modal.find(o.closeBtn).click(function(){
+		// 	if(overlay.length) overlay.remove();
+		// 	modal.remove();
+		// });
 		
 		return modal;
 	};
